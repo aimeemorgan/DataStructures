@@ -2,6 +2,9 @@ package structures;
 
 public abstract class MyAbstractGraph {
     
+    int vertexCount;
+    int edgeCount;
+    
     public abstract int getSize();
     
    /*
