@@ -4,21 +4,28 @@ import java.util.Collection;
 import java.util.Iterator;
 
 public class MyHeap<E> implements Collection<E> {
+    
+    int size;
+    Object[] heap;
 
-    public MyHeap() {
+    public MyHeap(int size) {
         // TODO Auto-generated constructor stub
+    }
+    
+    public E getMax() {
+        // TODO
+        return null;
     }
 
     @Override
     public int size() {
-        // TODO Auto-generated method stub
-        return 0;
+        return size;
     }
+    
 
     @Override
     public boolean isEmpty() {
-        // TODO Auto-generated method stub
-        return false;
+        return size == 0 ? true : false;
     }
 
     @Override
