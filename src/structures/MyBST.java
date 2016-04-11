@@ -4,22 +4,46 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;
 
-public class MyBST<E> implements Set<E> {
+public class MyBST<E extends Comparable<E>> implements Set<E> {
+    
+    int size;
+    TreeNode root;
+    
+    public class TreeNode {
+        E value;
+        TreeNode left;
+        TreeNode right;
+        
+        public TreeNode(E value) {
+            if (value == null) {
+                throw new IllegalArgumentException("Cannot insert a null value into MyBST");
+            }
+            
+            this.value = value;
+            this.left = null;
+            this.right = null;
+        }
+    }
 
     public MyBST() {
-        // TODO Auto-generated constructor stub
+        this.size = 0;
+        this.root = null;
+    }
+    
+    
+    public boolean isBalanced() {
+        // TODO
+        return false;
     }
 
     @Override
     public int size() {
-        // TODO Auto-generated method stub
-        return 0;
+        return this.size;
     }
 
     @Override
     public boolean isEmpty() {
-        // TODO Auto-generated method stub
-        return false;
+        return (size == 0) ? true : false;
     }
 
     @Override
@@ -30,25 +54,49 @@ public class MyBST<E> implements Set<E> {
 
     @Override
     public Iterator<E> iterator() {
-        // TODO Auto-generated method stub
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public Object[] toArray() {
-        // TODO Auto-generated method stub
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public <T> T[] toArray(T[] a) {
-        // TODO Auto-generated method stub
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public boolean add(E e) {
-        // TODO Auto-generated method stub
+        if (this.root == null) {
+            this.root = new TreeNode(e);
+            size++;
+            return true;
+        }
+        
+        return add(e, this.root);
+    }
+    
+    private boolean add(E e, TreeNode node) {
+        if (e.compareTo(node.value) > 0) {
+            if (node.right == null) {
+                node.right = new TreeNode(e);
+                return true;
+            }
+            
+            add(e, node.right);
+        }
+        
+        if (e.compareTo(node.value) < 0) {
+            if (node.left == null) {
+                node.left = new TreeNode(e);
+                return true;
+            } 
+            
+            add(e, node.left);
+        }
+        
         return false;
     }
 
@@ -60,14 +108,22 @@ public class MyBST<E> implements Set<E> {
 
     @Override
     public boolean containsAll(Collection<?> c) {
-        // TODO Auto-generated method stub
-        return false;
+        for (Object o : c) {
+            if (!contains(o)) return false;
+        }
+        return true;
     }
 
     @Override
     public boolean addAll(Collection<? extends E> c) {
-        // TODO Auto-generated method stub
-        return false;
+        boolean itemAdded = false;
+        
+        for (E item : c) {
+            boolean added = add(item);
+            if (!itemAdded && added) itemAdded = true;
+        }
+        
+        return itemAdded;
     }
 
     @Override
@@ -78,14 +134,19 @@ public class MyBST<E> implements Set<E> {
 
     @Override
     public boolean removeAll(Collection<?> c) {
-        // TODO Auto-generated method stub
-        return false;
+        boolean itemRemoved = false;
+        
+        for (Object item : c) {
+            boolean added = add((E)item);
+            if (!itemRemoved && added) itemRemoved = true;
+        }
+        
+        return itemRemoved;
     }
 
     @Override
     public void clear() {
-        // TODO Auto-generated method stub
-        
+        this.root = null;
     }
 
 }
