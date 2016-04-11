@@ -3,22 +3,10 @@ package structures;
 import java.util.Collection;
 import java.util.Iterator;
 
-public class MyHashSetLinkedList<E> extends MyAbstractHashTable<E> {
+public class MyHashTableLinkedList<E> extends MyAbstractHashTable<E> {
 
-    public MyHashSetLinkedList() {
-        // TODO Auto-generated constructor stub
-    }
-
-    @Override
-    public int size() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public boolean isEmpty() {
-        // TODO Auto-generated method stub
-        return false;
+    public MyHashTableLinkedList(int size) {
+        super(size);
     }
 
     @Override
@@ -83,6 +71,12 @@ public class MyHashSetLinkedList<E> extends MyAbstractHashTable<E> {
 
     @Override
     public void clear() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    protected void resize() {
         // TODO Auto-generated method stub
         
     }
